@@ -1,0 +1,8 @@
+content	fireshark	content/
+overlay	chrome://browser/content/browser.xul	chrome://fireshark/content/overlay.xul
+resource content content/
+
+locale	fireshark	en-US	locale/en-US/
+
+skin	fireshark	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://fireshark/skin/overlay.css

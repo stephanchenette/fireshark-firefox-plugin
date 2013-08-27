@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://fireshark/locale/firesharkwin.dtd">
+
+<dialog 
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		id="fswin-window"
+		title="Fireshark"
+		onload="onFSWinLoad()"
+		onunload="onFSWinUnLoad()"
+		buttons="none"
+		ondialogaccept="return true;"
+                height="500"
+		width="800"
+		persist="screenX screenY width height sizemode">	
+			
+	<script type="application/x-javascript" src="chrome://fireshark/content/firesharkwin.js"/>
+
+	<vbox flex="1">
+
+	<hbox>
+        <vbox>
+	<label control="fswin-urllabel" value="URL:"/>
+        <spring flex="1"/>
+        <label control="fswin-urllistlabel" value="URL List:"/>
+        </vbox>
+
+        <vbox>
+        <textbox id="fswin-url" flex="1" type="autocomplete" 
+				 searchSessions="history" timeout="50" 
+				 oninput="document.getElementById('fswin-startPauseButton').disabled=false;" style="min-width: 30em;"/>
+        <hbox>
+	<textbox id="fswin-urlfile" flex="1" style="min-width: 30em;"/>
+        <button id="fswin-upload" label="Browse..." type="checkbox" autoCheck="true"  
+		oncommand="openFilePicker();"/>
+	</hbox>
+        </vbox>
+        </hbox>
+
+	<hbox>
+	<button id="fswin-startPauseButton" label="Start" oncommand="onStartPauseButton()"/>
+	<button id="fswin-stopButton" label="Stop" oncommand="onStopButton()"/>
+	</hbox>
+
+	<spring style="height:10px"/>
+
+	<hbox flex="1">
+	<tabbox flex="1">
+  		<tabs>
+    		<tab label="View"/>
+    		<tab label="Options"/>
+  		</tabs>
+		
+		<tabpanels flex="1">  
+			<tabpanel id="firesharktab" flex="1">
+			<vbox flex="1"> 
+			
+			<spring style="height:10px"/>
+
+			<box flex="1">
+			<tabbox flex="1">
+	  		<tabs>
+			<tab label="Network"/>
+	    		<tab label="Graph"/>
+	    		<tab label="Content"/>
+			<tab label="Events"/>
+	  		</tabs>
+			<tabpanels flex="1">  
+			<tabpanel id="nettab">
+				<vbox flex="1">
+				<tree hidecolumnpicker="true" id="fswin-nettree" flex="1">
+				  <treecols>	
+				    <treecol label="Source" flex="1"/>
+				    <treecol label="Destination" flex="1"/>
+			            <treecol label="Type" flex="1"/>
+				  </treecols>
+				  <treechildren />
+				</tree>
+				<box>
+				<button id="fswin-treeclearButton" label="Clear" oncommand="onTreeClearButton()"/>
+				</box>
+				</vbox>
+			</tabpanel>
+			<tabpanel id="graphtab">
+				<vbox flex="1">
+				<browser id="graphFrame" flex="1" src="chrome://fireshark/content/graph.html" type="content" disablehistory="true"/>
+				</vbox>
+			</tabpanel>
+			<tabpanel id="contenttab">
+				<vbox flex="1">
+				<tree hidecolumnpicker="true"  seltype="single" id="fswin-contenttree" flex="1" onselect="onContentTreeSelect()">
+				  <treecols>	
+				    <treecol label="URL" primary="true" flex="1"/>  
+                    <treecol label="Type" flex="1"/> 
+				  </treecols>
+				  <treechildren />
+				</tree>
+				<hbox flex="1">
+					<vbox>
+					<label control="fswin-srclabel" value="Source file:"/>
+					</vbox>
+					<vbox>
+					<textbox id="fswin-srcpath" flex="1" style="min-width: 40em;"/>
+					</vbox>
+				</hbox>
+				<hbox flex="1">
+					<vbox>
+					<label control="fswin-domlabel" value="DOM file:"/>
+					</vbox>
+					<vbox>
+					<textbox id="fswin-dompath" flex="1" style="min-width: 40em;"/>
+					</vbox>
+				</hbox>
+				</vbox>
+			</tabpanel>
+			<tabpanel id="eventstab">
+				<vbox flex="1">
+				<textbox id="fswin-ouput" flex="1" multiline="true"/>
+				<box>
+				<button id="fswin-clearButton" label="Clear" oncommand="onClearButton()"/>
+				</box>
+				</vbox>
+			</tabpanel>
+			</tabpanels>  
+			</tabbox>
+			</box>
+
+			
+
+			</vbox>
+
+			</tabpanel>
+
+    		<tabpanel id="optionstab">
+                        
+            <vbox>
+                        
+            <hbox>
+			<vbox>
+    		<label control="httpReferrerLabel" value="HTTP referrer:"/>
+            <spring flex="1"/>
+			<label  flex="1" control="httpUserAgentLabel" value="HTTP user-agent:"/>
+                        <label control="fswin-urlLoadTimeout" value="URL Load timeout:"/>
+                        <spring flex="1"/>
+                        <label control="fswin-saveLocationLabel" value="Save files in:"/>
+                        </vbox>
+			<vbox>
+				<textbox id="fswin-httpReferrer" flex="1" style="min-width: 40em;"/>
+                <spring flex="1"/>
+				<textbox id="fswin-httpUserAgent" flex="1" style="min-width: 40em;"/>
+                <spring flex="1"/>
+                <hbox><textbox id="fswin-urlLoadTimeout" flex="1" type="number" style="max-width: 3em;max-height: 2em;"/></hbox>   
+                <spring flex="1"/> 
+                <hbox>			
+					<textbox id="fswin-saveLocation" flex="1" style="min-width: 20em;"/>
+					<button id="fswin-pickDir" label="Browse..." type="checkbox" autoCheck="true"  
+				oncommand="openDirPicker();"/>
+				</hbox>
+			</vbox>                        
+			</hbox> 
+			
+			<spring style="height:2px"/>
+			
+			<groupbox>
+			<caption label="Proxy Settings:" />
+			<vbox>
+				<checkbox id="fswin-proxyenabled" label="Enabled" 
+					oncommand="toggleEnabled(document.getElementById('fswin-proxy'));toggleEnabled(document.getElementById('fswin-proxyPort'));"/>
+
+				<hbox>
+					<vbox>
+					<label control="fswin-proxylabel" value="Proxy:"/>
+					</vbox>
+					<vbox>
+					<textbox id="fswin-proxy" flex="1" style="min-width: 20em;"/>
+					</vbox>
+				</hbox>
+				<hbox>
+					<vbox>
+					<label control="fswin-proxyportlabel" value="Proxy Port:"/>
+					</vbox>
+					<vbox>
+					<textbox id="fswin-proxyPort" flex="1" type="number" style="max-width: 3em;max-height: 2em;"/>
+					</vbox>
+				</hbox>
+			</vbox>
+			</groupbox>
+			
+			<spring style="height:10px"/>
+
+			<hbox flex="0">
+			<button id="fswin-optionssave" label="Save" type="checkbox" autoCheck="true" oncommand="onSaveOptionsButton();"/>
+			<button id="fswin-optionsrestoredefaults" label="Restore defaults" type="checkbox" autoCheck="true" oncommand="onRestoreDefaultsOptionsButton();"/>
+                	</hbox>
+
+			</vbox>
+	
+			</tabpanel>
+
+  		</tabpanels>
+	</tabbox>
+
+	</hbox>
+
+	<spring flex="1" />
+
+	</vbox>
+
+</dialog>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://fireshark/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://fireshark/locale/overlay.dtd">
+<overlay id="fireshark-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="overlay.js"/>
+	
+	<stringbundleset id="main-stringbundleset">
+		<stringbundle id="main-properties" src="chrome://fireshark/locale/fireshark.properties"/>
+	</stringbundleset>
+
+	<menupopup id="menu_ToolsPopup">
+		<menuitem id="menu_fireshark"
+              		label="&menuitem.label;" 
+			accesskey="&menuitem.accesskey;"
+			oncommand="onMenuItemCommand();"/>
+	</menupopup>
+</overlay>

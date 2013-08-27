@@ -1,0 +1,5 @@
+
+<!ENTITY window.title           "Fireshark - Web Analysis Toolkit">
+<!ENTITY clear.label            "Clear">
+<!ENTITY clear.accesskey        "e">
+

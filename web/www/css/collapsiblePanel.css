@@ -1,0 +1,13 @@
+.heading {
+margin: 1px;
+color: #fff;
+padding: 3px 10px;
+cursor: pointer;
+position: relative;
+background-color:#c30;
+}
+.content {
+padding: 5px 10px;
+background-color:#77BED2;
+}
+

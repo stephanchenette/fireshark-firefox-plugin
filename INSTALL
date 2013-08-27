@@ -1,0 +1,71 @@
+you will need to install python dev utils 
+or will get error
+fatal error: Python.h
+
+sudo apt-get install python2.6-dev
+
+or whatever your version of python is
+e.g. python -V to find out
+
+install python twisted framework
+http://twistedmatrix.com/
+sudo apt-get install python-twisted
+
+sudo cp service/fireshark.py /usr/sbin/
+sudo cp service/firesharkprofilemanager.py /usr/sbin/
+sudo cp service/firefoxprocess.py /usr/sbin/
+
+sudo chmod 777 /usr/sbin/fire*
+
+sudo cp daemon/fireshark /etc/init.d/
+
+sudo chmod 777 /etc/init.d/fireshark
+
+http://blog.martin-lyness.com/archives/installing-xvfb-on-ubuntu-9-10-karmic-koala
+install xfonts-base!!!
+sudo aptitude install x11-xkb-utils
+sudo aptitude install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
+sudo aptitude install xserver-xorg-core
+sudo aptitude remove dbus??? not sure about this one
+>> 
+>>
+apt-get install xvfb
+sudo chmod u+s `which Xvfb`
+
+sudo perl -MCPAN -e 'install Data::GUID'
+sudo perl -MCPAN -e 'install JSON::XS'
+
+sudo apt-get install firefox
+
+adduser fireshark
+passwd fireshark <- create password for fireshark user
+copy home stuff to fireshark dir
+sudo su fireshark
+
+type firefox which will fail but create default directories
+
+create a bunch of ff profiles
+/home/fireshark/m
+
+manageffprofiles.pl -c 500
+
+unzip extension to /usr/lib/firefox-addons/extensions/fireshark@fireshark.org
+
+sudo update-rc.d fireshark defaults
+
+copy over the otehr two .py files that are needed.
+
+sudo chmod 755 -R /home/fireshark/.mozilla/
+have to do above to make profiles writable
+
+then add fireshark to sudo file (not sure but have to do this)
+
+testFireshar.pl using port 10000
+
+
+for web
+
+Alien::Tidyp
+
+
+
